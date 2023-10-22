@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3 col-xl-2 bg-light sidebar">
+      <%= render partial: "shared/sidebar" %>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9 col-xl-10">
+      <div class="main-content-container">
+        <h1>Immunization Schedules</h1>
+        <div class="row">
+          <div class="col-md-6">
+            <%= form_with url: immunization_schedules_path, class: "search-form", method: :get do |form| %>
+              <div class="input-group">
+                <%= form.text_field :name, value: params[:name], class: "form-control", placeholder: "Search by baby's name" %>
+                <div class="input-group-append">
+                  <%= form.submit "Search", class: "btn btn-primary" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <br />
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Immunization Name</th>
+                <th>Date</th>
+                <th>Child</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @immunization_schedules.each do |immunization_schedule| %>
+                <tr>
+                  <td><%= immunization_schedule.vaxx_name %></td>
+                  <td><%= immunization_schedule.scheduled_date %></td>
+                  <td><%= immunization_schedule.child.baby_name %></td>
+                  <td>
+                    <%= link_to "View more", immunization_schedule, class: "btn btn-info btn-sm mr-1" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

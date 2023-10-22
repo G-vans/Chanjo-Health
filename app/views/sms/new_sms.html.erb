@@ -1,0 +1,31 @@
+<h1>Vaxx Alert</h1>
+<p>Please enter the details below to start sending immunization alerts</p>
+
+<%= form_tag sms_send_sms_path, method: :post do %>
+  <div>
+    <%= label_tag :parent, 'Parent Name:' %> <br />
+    <%= text_field_tag :parent, nil, placeholder: 'Enter name of parent' %>
+  </div>
+  <br />
+
+  <div>
+    <%= label_tag :baby, 'Child Name:' %> <br />
+    <%= text_field_tag :baby, nil, placeholder: 'Enter name of child' %>
+  </div>
+  <br />
+
+  <div>
+    <%= label_tag :phone_number, 'Phone Number:' %> <br />
+    <%= text_field_tag :phone_number, nil, placeholder: 'Enter phone number' %>
+  </div>
+  <br />
+
+  <div>
+    <%= label_tag 'date_of_birth[]', 'Date of Birth:' %> <br />
+    <%= date_field_tag 'date_of_birth[]', nil, placeholder: 'Enter date' %>
+  </div>
+  <br />
+
+  <%= submit_tag 'Send Alert', class: "btn btn-outline-primary" %>
+<% end %>
+<br />

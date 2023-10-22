@@ -5,4 +5,5 @@ class Medic < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
          has_many :immunizations
+         has_many :immunization_schedules
 end

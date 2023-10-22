@@ -1,10 +1,10 @@
-<%= form_with(model: immunization) do |form| %>
-  <% if immunization.errors.any? %>
+<%= form_with(model: [@child, @immunization]) do |form| %>
+  <% if @immunization.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(immunization.errors.count, "error") %> prohibited this immunization from being saved:</h2>
+      <h2><%= pluralize(@immunization.errors.count, "error") %> prohibited this immunization from being saved:</h2>
 
       <ul>
-        <% immunization.errors.each do |error| %>
+        <% @immunization.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :vax_name, style: "display: block" %>
-    <%= form.text_field :vax_name %>
+    <%= form.collection_select :vax_name, Immunization::VACCINE_NAMES, :to_s, :to_s, prompt: "Select an immunization" %>
   </div>
 
   <div>
@@ -22,13 +22,15 @@
   </div>
 
   <div>
-    <%= form.label :child_id, style: "display: block" %>
-    <%= form.text_field :child_id %>
-  </div>
+  <%= form.label :child_id, style: "display: block" %>
+  <%= form.text_field :child_id, value: @child.baby_name, disabled: true %>
+  <%= form.hidden_field :child_id, value: @child.id %>
+</div>
+
 
   <div>
     <%= form.label :medic_id, style: "display: block" %>
-    <%= form.text_field :medic_id %>
+    <%= form.text_field :medic_id, value: current_medic.email, disabled: true %>
   </div>
 
   <div>
