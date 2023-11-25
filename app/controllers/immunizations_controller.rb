@@ -1,5 +1,5 @@
 class ImmunizationsController < ApplicationController
-  before_action :set_immunization, only: %i[ show edit update destroy ]
+  before_action :authenticate_medic!, :set_immunization, only: %i[ show edit update destroy ]
 
   # GET /immunizations or /immunizations.json
   def index
